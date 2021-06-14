@@ -1,0 +1,155 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<cmath>
+#include<cstring>
+#include <iomanip>
+#include<string>
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+#include<ctype.h>
+#include<time.h>
+#include<bits/stdc++.h>
+using namespace std;
+const int M = 1e5 + 23;
+const int mod = 998244353;
+priority_queue<int, vector<int>, greater<int> >q;
+
+template <typename T>
+inline void read(T& f){f = 0;T fu = 1;char c = getchar();while (c < '0' || c > '9'){if (c == '-'){fu = -1;}c = getchar();}while (c >= '0' && c <= '9'){f = (f << 3) + (f << 1) + (c & 15);c = getchar();}f *= fu;}
+template <typename T>
+void print(T x){if (x < 0) putchar('-'), x = -x;if (x < 10) putchar(x + 48);else print(x / 10), putchar(x % 10 + 48);}
+template <typename T>
+void print(T x, char t){print(x);putchar(t);}
+#define ios ios::sync_with_stdio(false)
+#define eb emplace_back
+#define mem(a, b) memset(a, b, sizeof(a))
+#define INF 0x3f3f3f3f  
+#define LLINF 0x3f3f3f3f3f3f3f3f
+#define eps 1e-10
+#define pb push_back
+#define fi first
+#define se second
+#define SZ(x) (int)x.size()
+#define ALL(x) x.begin(), x.end()
+#define DEBUG(x) cerr << #x << '=' << x << endl
+#define repl(i,x,y) for(int i=x;i<=y; ++i)
+#define repr(i,k,n) for(int i=x;i>=y; --i)
+#define Pr(kcase,ans) printf("Case #%d: %lld\n",kcase,ans);
+#define PRi(a,n) For(i,n-1) cout<<a[i]<<' '; cout<<a[n]<<endl;
+#define mid (l+r>>1)
+#define lowbit(x) x&-x
+typedef pair<int, int> pii;
+typedef pair<pii, int> piii;
+typedef long long ll;
+
+cout.precision(4);//显示4位精度
+setfill(*) 设填充字符为*　　
+setprecision(n) 设显示小数精度为n位 　　
+setw(n) 设域宽为n个字符 　　
+setiosflags(ios::fixed) 固定的浮点显示 　　
+setiosflags(ios::scientific) 指数表示 　　
+setiosflags(ios::left) 左对齐 　　
+setiosflags(ios::right) 右对齐 　　
+setiosflags(ios::skipws) 忽略前导空白 　　
+setiosflags(ios::uppercase)16进制数大写输出 　　
+setiosflags(ios::lowercase)16进制数小写输出
+ios::dec  以10进制表示整数
+ios::hex  以16进制表示整数
+ios::oct  以8进制表示整数
+ios::showbase  为整数添加一个表示其进制的前缀
+ios::internal  在符号位和数值的中间插入需要数量的填充字符以使串两端对齐
+ios::left  在串的末尾插入填充字符以使串居左对齐
+ios::right  在串的前面插入填充字符以使串居右对齐
+ios::boolalpha  将bool类型的值以true或flase表示，而不是1或0
+ios::fixed  将符点数按照普通定点格式处理（非科学计数法）
+ios::scientific  将符点数按照科学计数法处理（带指数域）
+ios::showpoint  在浮点数表示的小数中强制插入小数点（默认情况是浮点数表示的整数不显示小数点）
+ios::showpos  强制在正数前添加+号
+ios::skipws  忽略前导的空格（主要用于输入流，如cin）
+ios::unitbuf  在插入（每次输出）操作后清空缓存
+ios::uppercase  强制大写字母
+
+unique(b+1,b+1+n)-(b+1);
+在从小到大的排序数组中，
+lower_bound( begin,end,num)：从数组的begin位置到end-1位置二分查找第一个大于或等于num的数字，找到返回该数字的地址，不存在则返回end。通过返回的地址减去起始地址begin,得到找到数字在数组中的下标。
+upper_bound( begin,end,num)：从数组的begin位置到end-1位置二分查找第一个大于num的数字，找到返回该数字的地址，不存在则返回end。通过返回的地址减去起始地址begin,得到找到数字在数组中的下标。
+在从大到小的排序数组中，重载lower_bound()和upper_bound()
+lower_bound( begin,end,num,greater<type>() ):从数组的begin位置到end-1位置二分查找第一个小于或等于num的数字，找到返回该数字的地址，不存在则返回end。通过返回的地址减去起始地址begin,得到找到数字在数组中的下标。
+upper_bound( begin,end,num,greater<type>() ):从数组的begin位置到end-1位置二分查找第一个小于num的数字，找到返回该数字的地址，不存在则返回end。通过返回的地址减去起始地址begin,得到找到数字在数组中的下标。
+iota(p.begin(), p.end(), 100);for (auto& i : p) {cout << i << " ";}
+_builtin_popcount()计算二进制中多少个1  计算一个 32 位无符号整数有多少个位为1 
+random_shuffle(pi+1,pi+1+n+m);//随机化，此处可以为结构体或者pair
+strtok(s,"5");//分割字符串函数
+atoi(p);//将字符串转换为数字
+ceil() 向上取整   floor() 向下取整
+unordered_map
+
+vector<int>v;
+int getid(int x){return lower_bound(v.begin(),v.end(),x)-v.begin()+1;//从1开始排名}
+v.erase(unique(v.begin(),v.end()),v.end());//vector数组离散化
+
+////欧拉筛or线性筛
+int prime[maxn];
+int visit[maxn];
+void Prime(){mem(visit,0);mem(prime, 0);for (int i = 2;i <= maxn; i++) {cout<<" i = "<<i<<endl;if (!visit[i]) {prime[++prime[0]] = i;}for (int j = 1; j <=prime[0] && i*prime[j] <= maxn; j++) {visit[i*prime[j]] = 1;if (i % prime[j] == 0) {break;}}}}
+
+void Prime(){for(int i=2;i<=MAXA;++i){if(vis[i]==0){primes.emplace_back(i);vis[i]=i;}for(auto &x : primes){if(x>vis[i]||x*i>MAXA) break;vis[x*i]=x;}}}
+
+//排序
+typedef pair<char,int> PAIR;
+bool Vcmp(PAIR p1,PAIR p2) {return p1.second < p2.second;}
+
+/** 大随机数*/
+mt19937 _rand(chrono::systm_clock::now().time_since_epoch().count));
+uniform_int_distribution<size_t> dis(0,1e9)
+inline int get(){return dis(_rand);}
+
+//埃式筛选素数
+int Sprime(){int k=0;for(int i=0;i<=M;i++) vis[i]=false;for(int i=2;i*i<=M;i++){if(!vis[i]){for(int j=i*i;j<=M;j+=i)vis[j]=true;}}for(int i=2;i<=M;i++)if(!vis[i])prime[k++]=i;return k;}
+
+//打印
+void print(__int128 x){if (x>9) print(x/10);putchar('0'+x%10);}
+
+template<class...Args>
+void debug(Args... args) {auto tmp = {(cerr << args << ' ', 0)...};cerr << endl;}
+
+inline int mul(int x, int y) { return 1ull * x * y % md; }
+/** 快速幂取模*/
+inline int fpow(int x, int y) {int ans = 1; while (y) {if (y & 1) ans = mul(ans, x);y >>= 1; x = mul(x, x);}return ans;}
+
+//快速幂取模
+long long solve(int a,int n){long long base=a;long long res=1;while(n){if(n&1)res=(base%mod)*(res%mod)%mod;base=(base%mod)*(base%mod)%mod;n>>=1;}return res%mod;}
+
+//判断闰年
+int check(int y){if((a%4!=0)||(a%100==0&&a%400!=0))return 0;return 1;}
+
+//素数判定
+bool JudgePrime(ll digit){if(digit==2 || digit==3)return true;else if(digit<=1 || digit%2==0)return false;else if(digit>3){for(int i=3; i*i<=digit; i+=2)if(digit%i==0)return false;return true;}}
+
+//测试代码运行时间
+int main(){clock_t start_time=clock();{}clock_t end_time=clock();cout<< "Running time is: "<<static_cast<double>(end_time-start_time)/CLOCKS_PER_SEC*1000<<"ms"<<endl;//输出运行时间return 0;}
+
+struct Node{
+    int a;
+    int b;
+
+    Node() :a(), b(){}//构造函数1
+    Node(int _a, int _b) :a(_a),b(_b){}//构造函数2
+    void init(int _a,int _b){//构造函数3
+        this->a=_a;
+        this->b=_b;
+    }
+    //重载操作符，多用于结构体多关键字比较；
+    bool operator < (const Node& N ) const{
+        if(a==N.a)
+        return b<N.b;
+        else return a<N.a;
+    };
+
+}q[10];
+
+//map通过vaule查找key
+class finder{public:finder(int &cmp_string) :s_(cmp_string) {}bool operator ()(const std::map<int, int>::value_type &item){return item.second == s_;}private:const int &s_;};
