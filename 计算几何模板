@@ -250,6 +250,46 @@ int Line_cross_circle(Line v,Circle C,Point &pa,Point &pb){//pa, pb是交点。�
     pb = q - n*k;
     return 2;//2个交点
 }
+//-------------------Start圆包含最多点问题----------------
+double eps=1e-8;
+int r;
+struct Point{
+    double x,y;
+    Point(){}
+    Point(double tx,double ty){
+        x=tx;
+        y=ty;
+    }
+}p[300];
+double dist(Point p1,Point p2){
+    return sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y));
+}
+Point get_circle(Point p1,Point p2){
+    Point mid=Point((p1.x+p2.x)/2,(p1.y+p2.y)/2);//中点
+    double angle=atan2(p1.x-p2.x,p2.y-p1.y);//角度
+    double d=sqrt(r*r-pow(dist(p1,mid),2));
+    return Point(mid.x+d*cos(angle),mid.y+d*sin(angle));
+}
+int main(){
+    int i,j,n,ans=1;
+    scanf("%d%d",&r,&n);
+    double a,b;
+    for(i=0;i<n;i++) scanf("%lf%lf",&p[i].x,&p[i].y);
+    for(i=0;i<n;i++){
+        for(j=i+1;j<n;j++){
+            if(dist(p[i],p[j])>2.0*r) continue;//两点距离大于直径
+            Point center=get_circle(p[i],p[j]);//求圆心
+            int cnt=0;
+            for(int k=0;k<n;k++){
+                if(dist(center,p[k])<1.0*r+eps) cnt++;
+            }
+            ans=max(ans,cnt);
+        }
+    }
+    cout<<ans<<endl;
+    return 0;
+}
+//-------------------End圆包含最多点问题----------------
 
 //-------------------三维几何----------------
 //三维：点
