@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include<cstdio>
 #include<algorithm>
@@ -11,6 +12,7 @@
 #include<stdlib.h>
 #include<ctype.h>
 #include<time.h>
+#include<bitset>
 #include<bits/stdc++.h>
 using namespace std;
 const int M = 1e5 + 23;
@@ -26,7 +28,7 @@ void print(T x, char t){print(x);putchar(t);}
 #define ios ios::sync_with_stdio(false)
 #define eb emplace_back
 #define mem(a, b) memset(a, b, sizeof(a))
-#define INF 0x3f3f3f3f  
+#define INF 0x3f3f3f3f
 #define LLINF 0x3f3f3f3f3f3f3f3f
 #define eps 1e-10
 #define pb push_back
@@ -41,9 +43,8 @@ void print(T x, char t){print(x);putchar(t);}
 #define PRi(a,n) For(i,n-1) cout<<a[i]<<' '; cout<<a[n]<<endl;
 #define mid (l+r>>1)
 #define lowbit(x) x&-x
-typedef pair<int, int> pii;
-typedef pair<pii, int> piii;
-typedef long long ll;
+
+
 
 cout.precision(4);//显示4位精度
 setfill(*) 设填充字符为*　　
@@ -72,6 +73,7 @@ ios::skipws  忽略前导的空格（主要用于输入流，如cin）
 ios::unitbuf  在插入（每次输出）操作后清空缓存
 ios::uppercase  强制大写字母
 
+///flush(stdout);  刷新输出缓冲区与cout<<endl;相同
 unique(b+1,b+1+n)-(b+1);
 在从小到大的排序数组中，
 lower_bound( begin,end,num)：从数组的begin位置到end-1位置二分查找第一个大于或等于num的数字，找到返回该数字的地址，不存在则返回end。通过返回的地址减去起始地址begin,得到找到数字在数组中的下标。
@@ -80,35 +82,21 @@ upper_bound( begin,end,num)：从数组的begin位置到end-1位置二分查找�
 lower_bound( begin,end,num,greater<type>() ):从数组的begin位置到end-1位置二分查找第一个小于或等于num的数字，找到返回该数字的地址，不存在则返回end。通过返回的地址减去起始地址begin,得到找到数字在数组中的下标。
 upper_bound( begin,end,num,greater<type>() ):从数组的begin位置到end-1位置二分查找第一个小于num的数字，找到返回该数字的地址，不存在则返回end。通过返回的地址减去起始地址begin,得到找到数字在数组中的下标。
 iota(p.begin(), p.end(), 100);for (auto& i : p) {cout << i << " ";}
-_builtin_popcount()计算二进制中多少个1  计算一个 32 位无符号整数有多少个位为1 
+_builtin_popcount()计算二进制中多少个1  计算一个 32 位无符号整数有多少个位为1
 random_shuffle(pi+1,pi+1+n+m);//随机化，此处可以为结构体或者pair
 strtok(s,"5");//分割字符串函数
 atoi(p);//将字符串转换为数字
 ceil() 向上取整   floor() 向下取整
 unordered_map
 
+    freopen("in.txt","r",stdin); //输入重定向，输入数据将从in.txt文件中读取
+    freopen("out.txt","w",stdout); //输出重定向，输出数据将保存在out.txt文件中
+    fclose(stdin);//关闭文件
+    fclose(stdout);//关闭文件
+
 vector<int>v;
 int getid(int x){return lower_bound(v.begin(),v.end(),x)-v.begin()+1;//从1开始排名}
 v.erase(unique(v.begin(),v.end()),v.end());//vector数组离散化
-
-//bitset
-bitset<8> foo ("10011011");
-cout << foo.count() << endl;　　//5　　（count函数用来求bitset中1的位数，foo中共有５个１
-cout << foo.size() << endl;　　 //8　　（size函数用来求bitset的大小，一共有８位
-cout << foo.test(0) << endl;　　//true　　（test函数用来查下标处的元素是０还是１，并返回false或true，此处foo[0]为１，返回true
-cout << foo.test(2) << endl;　　//false　　（同理，foo[2]为０，返回false
-cout << foo.any() << endl;　　//true　　（any函数检查bitset中是否有１
-cout << foo.none() << endl;　　//false　　（none函数检查bitset中是否没有１
-cout << foo.all() << endl;　　//false　　（all函数检查bitset中是全部为１
-bitset<8> foo ("10011011");
-cout << foo.flip(2) << endl;　　//10011111　　（flip函数传参数时，用于将参数位取反，本行代码将foo下标２处"反转"，即０变１，１变０
-cout << foo.flip() << endl;　　 //01100000　　（flip函数不指定参数时，将bitset每一位全部取反
-cout << foo.set() << endl;　　　　//11111111　　（set函数不指定参数时，将bitset的每一位全部置为１
-cout << foo.set(3,0) << endl;　　//11110111　　（set函数指定两位参数时，将第一参数位的元素置为第二参数的值，本行对foo的操作相当于foo[3]=0
-cout << foo.set(3) << endl;　　  //11111111　　（set函数只有一个参数时，将参数下标处置为１
-cout << foo.reset(4) << endl;　　//11101111　　（reset函数传一个参数时将参数下标处置为０
-cout << foo.reset() << endl;　　 //00000000　　（reset函数不传参数时将bitset的每一位全部置为０
-
 
 ////欧拉筛or线性筛
 int prime[maxn];
@@ -125,7 +113,25 @@ bool Vcmp(PAIR p1,PAIR p2) {return p1.second < p2.second;}
 mt19937 _rand(chrono::systm_clock::now().time_since_epoch().count));
 uniform_int_distribution<size_t> dis(0,1e9)
 inline int get(){return dis(_rand);}
+#define _MATH_DEFINES_DEFINED
 
+
+#if defined(_USE_MATH_DEFINES) && !defined(_MATH_DEFINES_DEFINED)
+#define M_E        2.71828182845904523536
+#define M_LOG2E    1.44269504088896340736
+#define M_LOG10E   0.434294481903251827651
+#define M_LN2      0.693147180559945309417
+#define M_LN10     2.30258509299404568402
+#define M_PI       3.14159265358979323846
+#define M_PI_2     1.57079632679489661923
+#define M_PI_4     0.785398163397448309616
+#define M_1_PI     0.318309886183790671538
+#define M_2_PI     0.636619772367581343076
+#define M_2_SQRTPI 1.12837916709551257390
+#define M_SQRT2    1.41421356237309504880
+#define M_SQRT1_2  0.707106781186547524401
+
+#endif
 //埃式筛选素数
 int Sprime(){int k=0;for(int i=0;i<=M;i++) vis[i]=false;for(int i=2;i*i<=M;i++){if(!vis[i]){for(int j=i*i;j<=M;j+=i)vis[j]=true;}}for(int i=2;i<=M;i++)if(!vis[i])prime[k++]=i;return k;}
 
