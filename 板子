@@ -89,12 +89,16 @@ atoi(p);//将字符串转换为数字
 ceil() 向上取整   floor() 向下取整
 unordered_map
 
+#ifdef ONLINE_JUDGE
+
+#else
+
 freopen("C:\\Users\\ASUS\\Desktop\\Test data\\retribution\\data\\secret\\r01.txt","r",stdin); //输入重定向，输入数据将从in.txt文件中读取
 //
 freopen("C:\\Users\\ASUS\\Desktop\\Test data\\retribution\\data\\secret\\out.txt","w",stdout); //输出重定向，输出数据将保存在out.txt文件中
    fclose(stdin);//关闭文件
     fclose(stdout);//关闭文件
-
+#endif
 vector<int>v;
 int getid(int x){return lower_bound(v.begin(),v.end(),x)-v.begin()+1;//从1开始排名}
 v.erase(unique(v.begin(),v.end()),v.end());//vector数组离散化
