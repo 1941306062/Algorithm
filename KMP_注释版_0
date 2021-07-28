@@ -1,3 +1,7 @@
+*.js linguist-language=java
+*.css linguist-language=java
+*.html linguist-language=java
+
 /*
     时间复杂度：如果文本串的长度为n，模式串的长度为m，那么匹配过程的时间复杂度为O(n)，算上计算next的O(m)时间，KMP的整体时间复杂度为O(m + n)。
     算法说明：
