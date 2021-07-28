@@ -99,6 +99,14 @@ int Line_relation(Line v1, Line v2){
     }
     return 2; //2 相交
 }
+//直线和线段关系:0 平行,1 重合,2 相交
+int SegLineCross(Point a,Point b,Point c,Point d){
+	int d1=sgn(Cross(a-c,b-c));
+	int d2=sgn(Cross(a-d,b-d));
+	if((d1^d2)==-2) return 1;
+	if(d1==0||d2==0) return 2;
+	return 0;
+}
 
  //点到直线的距离
  double Dis_point_line(Point p, Line v){
