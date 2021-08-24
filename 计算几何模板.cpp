@@ -23,6 +23,14 @@ struct Point{  //定义点和基本运算
     Point operator / (double k){return Point(x/k,y/k);}    //长度缩小k倍
     bool operator == (Point B){return sgn(x-B.x)==0 && sgn(y-B.y)==0;}
     bool operator < (Point B){return sgn(x-B.x)<0 || (sgn(x-B.x)==0 && sgn(y-B.y)<0);} //用于凸包
+     /**
+     * 叉积
+     */
+    double operator ^ (const Point &b)const{return x*b.y-y*b.x;}   
+    /**
+     * 点积
+     */
+    double operator * (const Point &b)const{return x*b.x+y*b.y;}  
 };
 typedef Point Vector;   //定义向量
 double Dot(Vector A,Vector B){return A.x*B.x + A.y*B.y;} //点积
@@ -144,6 +152,23 @@ bool Cross_segment(Point a,Point b,Point c,Point d){//Line1:ab,  Line2:cd
 	double c1=Cross(b-a,c-a),c2=Cross(b-a,d-a);
 	double d1=Cross(d-c,a-c),d2=Cross(d-c,b-c);
 	return sgn(c1)*sgn(c2)<0 && sgn(d1)*sgn(d2)<0;//注意交点是端点的情况不算在内
+}
+/**
+ * 两线段相交判断
+ * 2规范相交
+ * 1非规范相交
+ * 0不相交
+ */
+int segcrosseg(Point a, Point b, Point c, Point d) {
+  int d1 = sgn((b - a) ^ (c - a));
+  int d2 = sgn((b - a) ^ (d - a));
+  int d3 = sgn((d - c) ^ (a - c));
+  int d4 = sgn((d - c) ^ (b - c));
+  if ((d1 ^ d2) == -2 && (d3 ^ d4) == -2) return 2;
+  return (d1 == 0 && sgn((c - a) * (c - b)) <= 0) ||
+         (d2 == 0 && sgn((d - a) * (d - b)) <= 0) ||
+         (d3 == 0 && sgn((a - c) * (a - d)) <= 0) ||
+         (d4 == 0 && sgn((b - c) * (b - d)) <= 0);
 }
 //---------------平面几何：多边形----------------
 struct Polygon{
